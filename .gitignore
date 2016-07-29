@@ -1,5 +1,5 @@
 mccree/
-keys/
+.botkeys
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
