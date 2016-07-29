@@ -14,7 +14,6 @@ HIGH_NOON = "High Noon"
 # instantiate Slack & Twilio clients
 slack_client = SlackClient(os.environ.get('MCCREE_BOT_TOKEN'))
 
-
 def handle_command(command, channel):
     if THE_QUESTION in command or "what time it is" in command :
         response = "It's High Noon. . ."
