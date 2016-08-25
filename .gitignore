@@ -1,5 +1,5 @@
 mccree/
-.botkeys
+*.botkeys
 nohup.out
 
 # Byte-compiled / optimized / DLL files
