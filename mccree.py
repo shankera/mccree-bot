@@ -11,6 +11,7 @@ BOT_ID = os.environ.get("MCCREE_ID")
 AT_BOT = "<@" + BOT_ID + ">:"
 THE_QUESTION = "what time is it"
 HIGH_NOON = "High Noon"
+WHENS = ["when is", "when will", "when did", "when should"]
 
 # instantiate Slack & Twilio clients
 slack_client = SlackClient(os.environ.get('MCCREE_BOT_TOKEN'))
@@ -24,7 +25,7 @@ def handle_command(command, channel):
         response = "You're damn right"
         slack_client.api_call("chat.postMessage", channel=channel,
                           text=response, as_user=True)
-    elif command.startswith(("what time")) or string.replace(command, "whenever", "").startswith(("when")):
+    elif command.startswith(("what time")) or any([string.replace(command, "whenever", "").startswith(when) for when in WHENS]):
         slack_client.api_call("chat.postMessage", channel=channel,
                           text=HIGH_NOON, as_user=True)
     elif command.lower().startswith((AT_BOT.lower()+" fuck you")):
