@@ -9,3 +9,5 @@ Source tutorial on [FullStackPython.com](https://www.fullstackpython.com/blog/bu
  - create a file called .botkeys at the root directory, and add your slack bot api-keys to it
  - run mccree.sh as a bash script
 
+
+If you encounter an InsecurePlatformWarning, either ensure that you are on python version 2.7.9 or follow the steps in [this StackOverflow post](http://stackoverflow.com/questions/29134512/insecureplatformwarning-a-true-sslcontext-object-is-not-available-this-prevent).
