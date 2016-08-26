@@ -17,19 +17,21 @@ WHENS = ["when is", "when will", "when did", "when should", "when are"]
 slack_client = SlackClient(os.environ.get('MCCREE_BOT_TOKEN'))
 
 def handle_command(command, channel):
+    response = ""
     if THE_QUESTION in command or "what time it is" in command :
         response = "It's High Noon. . ."
-        slack_client.api_call("chat.postMessage", channel=channel,
-                          text=response, as_user=True)
+    elif command.startswith(("what fucking time")) or command.startswith(("when the fuck")):
+        response = "HIIIGH FUCKIN' NOON!"
     elif HIGH_NOON.lower() in command:
         response = "You're damn right"
-        slack_client.api_call("chat.postMessage", channel=channel,
-                          text=response, as_user=True)
     elif command.startswith(("what time")) or any([string.replace(command, "whenever", "").startswith(when) for when in WHENS]):
-        slack_client.api_call("chat.postMessage", channel=channel,
-                          text=HIGH_NOON, as_user=True)
+        response = HIGH_NOON
     elif command.lower().startswith((AT_BOT.lower()+" fuck you")):
-        slack_client.api_call("chat.postMessage", channel=channel, text="What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little “clever” comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, kiddo.", as_user=True)
+        response = "What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little “clever” comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, kiddo."
+
+    if response != "":
+        slack_client.api_call("chat.postMessage", channel=channel,
+                      text=response, as_user=True)
 #    elif command.startswith(("who are you")):
 #        slack_client.api_call("chat.postMessage", channel=channel,
 #                          text="/giphy mccree", as_user=True)
