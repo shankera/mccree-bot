@@ -11,7 +11,7 @@ BOT_ID = os.environ.get("MCCREE_ID")
 AT_BOT = "<@" + BOT_ID + ">:"
 THE_QUESTION = "what time is it"
 HIGH_NOON = "High Noon"
-WHENS = ["when is", "when will", "when did", "when should"]
+WHENS = ["when is", "when will", "when did", "when should", "when are"]
 
 # instantiate Slack & Twilio clients
 slack_client = SlackClient(os.environ.get('MCCREE_BOT_TOKEN'))
