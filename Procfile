@@ -1,1 +1,1 @@
-python mccree.py
+worker: python mccree.py
