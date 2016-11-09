@@ -5,7 +5,7 @@ import string
 
 from slackclient import SlackClient
 # starterbot's ID as an environment variable
-BOT_ID = os.environ["MCCREE_ID"]
+BOT_ID = ''#os.environ["MCCREE_ID"]
 
 # constants
 AT_BOT = "<@" + BOT_ID + ">:"
@@ -32,9 +32,6 @@ def handle_command(command, channel):
     if response != "":
         slack_client.api_call("chat.postMessage", channel=channel,
                       text=response, as_user=True)
-#    elif command.startswith(("who are you")):
-#        slack_client.api_call("chat.postMessage", channel=channel,
-#                          text="/giphy mccree", as_user=True)
 
 def parse_slack_output(slack_rtm_output):
     output_list = slack_rtm_output
@@ -58,7 +55,7 @@ if __name__ == "__main__":
         users = api_call.get('members')
         for user in users:
             if 'name' in user and user.get('name') == BOT_NAME:
-                print(user.get('id'))
+                BOT_ID = user.get('name')
     else:
         print("could not find bot user with the name " + BOT_NAME)
 
