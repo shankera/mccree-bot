@@ -46,7 +46,7 @@ def parse_slack_output(slack_rtm_output):
 
 
 BOT_NAME = 'mccree'
-slack_client = SlackClient(S3Client(os.environ['MCCREE_GB_BOT_ID']))
+slack_client = SlackClient(os.environ['MCCREE_GB_BOT_ID'])
 if __name__ == "__main__":
 
     api_call = slack_client.api_call("users.list")
