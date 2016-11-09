@@ -4,17 +4,14 @@ import time
 import string
 
 from slackclient import SlackClient
-# starterbot's ID as an environment variable
-BOT_ID = ''#os.environ["MCCREE_ID"]
-BOT_NAME = 'mccree'
-# constants
+
+BOT_ID = os.environ.get("MCCREE_ID")
 AT_BOT = "<@" + BOT_ID + ">:"
 THE_QUESTION = "what time is it"
 HIGH_NOON = "High Noon"
 WHENS = ["when is", "when will", "when did", "when should", "when are"]
 
-# instantiate Slack & Twilio clients
-slack_client = SlackClient(os.environ.get('MCCREE_GB_BOT_ID'))
+slack_client = SlackClient(os.environ.get('MCCREE_BOT_TOKEN'))
 
 def handle_command(command, channel):
     response = ""
@@ -45,19 +42,6 @@ def parse_slack_output(slack_rtm_output):
     return None, None
 
 if __name__ == "__main__":
-    api_call = slack_client.api_call("users.list")
-    if api_call.get('ok'):
-        # retrieve all users so we can find our bot
-        users = api_call.get('members')
-        for user in users:
-            if 'name' in user and user.get('name') == BOT_NAME:
-                BOT_ID = user.get('id')
-                print(BOT_ID)
-    else:
-        print("could not find bot user with the name " + BOT_NAME)
-
-
-
     READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
     if slack_client.rtm_connect():
         print("mccree is here!")
