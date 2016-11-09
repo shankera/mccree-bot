@@ -1,1 +1,1 @@
-web: python mccree.py
+web: python mccree.py ${PORT}
