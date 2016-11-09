@@ -5,7 +5,7 @@ import string
 
 from slackclient import SlackClient
 # starterbot's ID as an environment variable
-BOT_ID = os.environ.get("MCCREE_ID")
+BOT_ID = os.environ["MCCREE_ID"]
 
 # constants
 AT_BOT = "<@" + BOT_ID + ">:"
@@ -47,7 +47,23 @@ def parse_slack_output(slack_rtm_output):
                        output['channel']
     return None, None
 
+
+BOT_NAME = 'mccree'
+slack_client = S3Client(os.environ['MCCREE_GB_BOT_ID'])
 if __name__ == "__main__":
+
+    api_call = slack_client.api_call("users.list")
+    if api_call.get('ok'):
+        # retrieve all users so we can find our bot
+        users = api_call.get('members')
+        for user in users:
+            if 'name' in user and user.get('name') == BOT_NAME:
+                print(user.get('id'))
+    else:
+        print("could not find bot user with the name " + BOT_NAME)
+
+
+
     READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
     if slack_client.rtm_connect():
         print("mccree is here!")
