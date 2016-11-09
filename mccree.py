@@ -56,6 +56,7 @@ if __name__ == "__main__":
         for user in users:
             if 'name' in user and user.get('name') == BOT_NAME:
                 BOT_ID = user.get('name')
+                print(BOT_ID)
     else:
         print("could not find bot user with the name " + BOT_NAME)
 
