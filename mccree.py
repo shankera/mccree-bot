@@ -4,8 +4,6 @@ import time
 import string
 
 from slackclient import SlackClient
-from flask import Flask
-app = Flask(__name__)
 # starterbot's ID as an environment variable
 BOT_ID = ''#os.environ["MCCREE_ID"]
 
@@ -50,10 +48,6 @@ def parse_slack_output(slack_rtm_output):
 BOT_NAME = 'mccree'
 slack_client = SlackClient(os.environ.get('MCCREE_GB_BOT_ID'))
 if __name__ == "__main__":
-
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
-
     api_call = slack_client.api_call("users.list")
     if api_call.get('ok'):
         # retrieve all users so we can find our bot
