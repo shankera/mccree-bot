@@ -1,1 +1,1 @@
-web: python mccree.py
+python mccree.py
