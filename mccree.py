@@ -55,7 +55,7 @@ if __name__ == "__main__":
         users = api_call.get('members')
         for user in users:
             if 'name' in user and user.get('name') == BOT_NAME:
-                BOT_ID = user.get('name')
+                BOT_ID = user.get('id')
                 print(BOT_ID)
     else:
         print("could not find bot user with the name " + BOT_NAME)
